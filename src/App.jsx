@@ -70,7 +70,7 @@ function App() {
         </div>
       )}
       <button onClick={reset} className="reset">
-        Reset
+        Reset 
       </button>
     </>
   );

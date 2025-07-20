@@ -62,11 +62,9 @@ function App() {
     setSquares(Array(9).fill(""));
     setIsXNext(true);
   };
-
-  console.log("showInstallButton : ", showInstallButton);
+  
   // Handle install prompt
   useEffect(() => {
-    console.log("useEffect run");
     const handler = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
@@ -79,7 +77,7 @@ function App() {
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
     };
-  }, [isXNext]);
+  }, []);
 
   const handleInstallClick = async () => {
     if (!deferredPrompt) return;

@@ -17,7 +17,7 @@ body,
 
 body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #121817, #acb6e5);
+    background: linear-gradient(135deg, #cbdad7, #acb6e5);
     /* Light teal to soft lavender */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 1rem;

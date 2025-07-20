@@ -18,22 +18,22 @@ export default defineConfig({
         theme_color: "#1976d2",
         screenshots: [
           {
-            src: "favicon.png",
+            src: "screenshot.png",
             type: "image/png",
-            sizes: "1280x720",
+            sizes: "1920x1080",
             form_factor: "wide", // or "narrow" for mobile
           },
         ],
         icons: [
           {
             src: "image.png",
-            sizes: "144x144",
+            sizes: "143x143",
             type: "image/png",
             purpose: "any",
           },
           {
             src: "image.png",
-            sizes: "144x144",
+            sizes: "143x143",
             type: "image/png",
             purpose: "any",
           },

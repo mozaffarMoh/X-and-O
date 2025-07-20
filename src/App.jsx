@@ -30,7 +30,11 @@ function App() {
       [2, 4, 6],
     ];
     for (const [a, b, c] of lines) {
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      if (
+        squares[a] &&
+        squares[a] === squares[b] &&
+        squares[a] === squares[c]
+      ) {
         return squares[a];
       }
     }
@@ -45,11 +49,14 @@ function App() {
     setIsXNext(true);
   };
 
+      console.log("showInstallButton : ", showInstallButton);
   // Handle install prompt
   useEffect(() => {
     const handler = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
+      console.log("event : ", e);
+
       setShowInstallButton(true);
     };
 
@@ -72,7 +79,11 @@ function App() {
   return (
     <>
       {showInstallButton && (
-        <button onClick={handleInstallClick} className="reset" style={{ marginBottom: "1rem" }}>
+        <button
+          onClick={handleInstallClick}
+          className="reset"
+          style={{ marginBottom: "1rem" }}
+        >
           Install App
         </button>
       )}

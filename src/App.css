@@ -1,87 +1,124 @@
- body,
- .all-squares,
- .square,
- .dialog {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     text-align: center;
-     width: 100%;
-     height: 100vh;
- }
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
- body {
-     background-image: linear-gradient(to left, rgb(167, 210, 248), rgb(223, 243, 221));
-     font-family: cursive;
- }
+body,
+.all-squares,
+.square,
+.dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
- label {
-     font-weight: 800;
-     font-size: 45px;
-     color: rgb(153, 78, 78);
- }
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    /* Light teal to soft lavender */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 1rem;
+    flex-direction: column;
+}
 
- .all-squares {
-     width: 400px;
-     height: 400px;
-     flex-wrap: wrap;
-     margin-top: 20px;
- }
+/* Title Label */
+label {
+    font-weight: 900;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
 
- .square {
-     width: 100px;
-     height: 100px;
-     font-size: 30px;
-     font-weight: 800;
-     background-color: rgb(14, 15, 5);
-     color: white;
-     border-radius: 50px;
-     margin: 10px;
-     cursor: pointer;
-     transition: all 0.3s ease;
- }
+/* Game Board */
+.all-squares {
+    width: 100%;
+    max-width: 360px;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
 
- .square:hover {
-     background-color: rgb(46, 53, 59);
-     color: black
- }
+/* Game Squares */
+.square {
+    width: 100px;
+    height: 100px;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: #222831;
+    color: #f2f2f2;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
+.square:hover {
+    background-color: #393e46;
+    transform: scale(1.05);
+    color: #eeeeee;
+}
 
- .reset {
-     width: 100px;
-     height: 50px;
-     background-color: rgb(190, 143, 72);
-     color: whitesmoke;
-     border: none;
-     border-radius: 3px;
-     font-size: 15px;
-     font-weight: 600;
-     cursor: pointer;
- }
+/* Reset Button */
+.reset {
+    padding: 0.75rem 1.5rem;
+    background-color: #00adb5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
- .reset:hover {
-     background-color: rgb(179, 117, 25);
-     color: black;
- }
+.reset:hover {
+    background-color: #007b83;
+}
 
- .dialog {
-     width: 400px;
-     height: 100px;
-     position: relative;
-     top: 60px;
-     font-size: 20px;
-     font-weight: 800;
-     border-radius: 10px;
-     background-color: green;
-     color: white;
-     opacity: 0;
-     box-shadow: 10px 10px 20px white;
-     visibility: hidden;
-     transition: opacity 1.5s ease, visibility 0s 2s;
- }
+/* Win Dialog */
+.dialog {
+    width: 100%;
+    max-width: 320px;
+    height: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 12px;
+    background-color: #79ce7b;
+    color: white;
+    margin-left: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease, visibility 0s 1.2s;
+}
 
- .dialog-display {
-     opacity: 1;
-     visibility: visible;
-     transition: opacity 1.5s ease, visibility 0s;
- }
+.dialog-display {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 480px) {
+    .square {
+        width: 80px;
+        height: 80px;
+        font-size: 1.5rem;
+    }
+
+    .reset {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+
+    label {
+        font-size: 2rem;
+    }
+
+    .dialog {
+        font-size: 1rem;
+    }
+}

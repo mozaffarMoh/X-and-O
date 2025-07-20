@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [squares, setSquares] = React.useState(Array(9).fill(""));
-  const [isXNext, setIsXNext] = React.useState(true);
+  const [squares, setSquares] = useState(Array(9).fill(""));
+  const [isXNext, setIsXNext] = useState(true);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showInstallButton, setShowInstallButton] = useState(false);
 
-  /* Add Item */
+  // Add item on square click
   const addItem = (index) => {
-    if (squares[index]) {
-      return;
-    }
-    const newSquares = squares;
+    if (squares[index] || winner) return;
+
+    const newSquares = [...squares]; // Create a copy
     newSquares[index] = isXNext ? "X" : "O";
-    setSquares([...newSquares]);
+    setSquares(newSquares);
     setIsXNext(!isXNext);
   };
 
-  /* Calculate Winner */
+  // Calculate winner
   const calculateWinner = (squares) => {
     const lines = [
       [0, 1, 2],
@@ -28,49 +29,74 @@ function App() {
       [0, 4, 8],
       [2, 4, 6],
     ];
-
     for (const [a, b, c] of lines) {
-      if (
-        squares[a] &&
-        squares[a] === squares[b] &&
-        squares[a] === squares[c]
-      ) {
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
         return squares[a];
       }
     }
     return null;
   };
-  /* Store winner in variable */
+
   const winner = calculateWinner(squares);
 
-  /* reset game */
+  // Reset game
   const reset = () => {
     setSquares(Array(9).fill(""));
     setIsXNext(true);
   };
 
+  // Handle install prompt
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowInstallButton(true);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to install prompt: ${outcome}`);
+
+    setDeferredPrompt(null);
+    setShowInstallButton(false);
+  };
+
   return (
     <>
-      <div className={`dialog ${winner && "dialog-display"}`}>
-        Winner is : {winner}
+      {showInstallButton && (
+        <button onClick={handleInstallClick} className="reset" style={{ marginBottom: "1rem" }}>
+          Install App
+        </button>
+      )}
+
+      <div className={`dialog ${winner ? "dialog-display" : ""}`}>
+        {winner && `Winner is: ${winner}`}
       </div>
-      <label>X and O Game</label>
-      <div className="all-squares">
-        {squares.map((square, index) => {
-          return (
-            <div className="square" onClick={() => addItem(index)} key={index}>
-              {square}
-            </div>
-          );
-        })}
-      </div>
+
       {!winner && (
         <div>
-          <h1>Next Player is : {isXNext ? "X" : "O"}</h1>
+          <label>Next Player: {isXNext ? "X" : "O"}</label>
         </div>
       )}
+
+      <div className="all-squares">
+        {squares.map((square, index) => (
+          <div className="square" onClick={() => addItem(index)} key={index}>
+            {square}
+          </div>
+        ))}
+      </div>
+
       <button onClick={reset} className="reset">
-        Reset 
+        Reset
       </button>
     </>
   );

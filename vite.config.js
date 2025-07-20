@@ -17,26 +17,35 @@ export default defineConfig({
         display: "standalone",
         background_color: "#ffffff",
         theme_color: "#1976d2",
+        description: "Play Tic‑Tac‑Toe offline with Xs and Os!",
         screenshots: [
           {
-            src: "screenshot.png",
+            src: "screenshot-mobile.png",
+            sizes: "540x960",
             type: "image/png",
-            sizes: "1920x1080",
-            form_factor: "wide", // or "narrow" for mobile
+            form_factor: "narrow",
+            label: "Mobile overview",
+          },
+          {
+            src: "screenshot-desktop.png",
+            sizes: "1280x720",
+            type: "image/png",
+            form_factor: "wide",
+            label: "Desktop layout",
           },
         ],
         icons: [
           {
-            src: "image.png",
-            sizes: "143x143",
+            src: "icon.png",
+            sizes: "512x512",
             type: "image/png",
             purpose: "any",
           },
           {
-            src: "image.png",
-            sizes: "143x143",
+            src: "icon.png",
+            sizes: "512x512",
             type: "image/png",
-            purpose: "any",
+            purpose: "maskable",
           },
         ],
       },

@@ -12,8 +12,8 @@ export default defineConfig({
       manifest: {
         name: "X and O game",
         short_name: "XOGAME",
+        start_url: "/X-and-O/",
         scope: "/X-and-O/",
-        start_url: "/",
         display: "standalone",
         background_color: "#ffffff",
         theme_color: "#1976d2",
